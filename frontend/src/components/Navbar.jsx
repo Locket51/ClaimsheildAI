@@ -6,6 +6,7 @@ export default function Navbar({ currentPath, onNavigate, theme, onToggleTheme }
 
   const navItems = [
     { label: 'Home', path: '/' },
+    { label: 'Compare Policies', path: '/compare' },
     { label: 'How it works', path: '/how-it-works' },
     { label: 'Privacy', path: '/privacy' }
   ];
