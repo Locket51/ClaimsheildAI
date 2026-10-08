@@ -32,7 +32,7 @@ ClaimShield AI operates on a modular, decoupled pipeline architecture:
 |                                 BACKEND (FastAPI)                                 |
 |                                                                                   |
 |  1. File Ingestion & Parsing Buffer (Ephemeral Bytes)                             |
-|  2. Gemma Extraction Service (Gemini API Integration)                             |
+|  2. Gemma Extraction Service (Local Ollama Integration)                             |
 |  3. Snowflake Rule & Benchmark Fetcher                                            |
 |  4. Adversarial Audit Engine                                                      |
 |  5. Model Harness Validation Middleware                                           |
@@ -57,7 +57,7 @@ Step 1: User Uploads Policy (PDF) + Enters Incident Description + Optional Evide
   ↓
 Step 2: FastAPI receives request; creates an Ephemeral Processing Session in memory.
   ↓
-Step 3: Gemma (via Gemini API) parses PDF & text to output structured JSON:
+Step 3: Gemma (via Local Ollama) parses PDF & text to output structured JSON:
         - Extracted Policy Clauses (Limits, Deadlines, Co-pay, Exclusions)
         - Extracted Incident Facts (Admission time, Room rent, Surgery type)
   ↓
@@ -162,7 +162,7 @@ App
 - **Response Format:** `application/json` (See Schema in Section 7)
 
 #### `GET /api/v1/health`
-- **Description:** Liveness check verifying connections to Gemini API & Snowflake.
+- **Description:** Liveness check verifying connections to local Ollama & Snowflake.
 - **Response:** `{"status": "ok", "gemini": true, "snowflake": true}`
 
 #### `POST /api/v1/draft-email`
@@ -175,7 +175,7 @@ App
 ## 6. Gemma Document AI Pipeline
 
 ### 6.1 Extraction Strategy `[PLANNED]`
-Gemma (via Gemini API `gemma-3-27b-it` or equivalent) is invoked with strict JSON mode and Pydantic validation schemas.
+Gemma (via local Ollama `gemma4:e4b`) is invoked with strict JSON mode and Pydantic validation schemas.
 
 ### 6.2 Prompt Strategy
 1. **Policy Extraction Prompt:** Instructs Gemma to locate and extract precise numeric values, temporal constraints, and exact clause section identifiers from the raw PDF text.
@@ -555,7 +555,7 @@ To maximize speed and guarantee a fully functional MVP within 8–12 hours, deve
                                        v
 +--------------------------------------------------------------------------------+
 | PHASE 2: Gemma Extraction Pipeline                                             |
-|          - Set up Gemini API integration for policy & incident extraction      |
+|          - Set up Local Ollama integration for policy & incident extraction      |
 |          - Define Pydantic schemas for JSON structure                          |
 +--------------------------------------------------------------------------------+
                                        |
@@ -604,7 +604,7 @@ To maximize speed and guarantee a fully functional MVP within 8–12 hours, deve
 ### In Scope for MVP:
 - PDF Policy Upload & Client-side validation
 - Natural text Incident input form
-- Gemma-powered structured extraction via Gemini API
+- Gemma4-powered structured extraction via Local Ollama
 - Snowflake repository of Policy-risk rules & procedure benchmarks
 - Adversarial Claim Audit engine generating evidence-backed findings
 - Model Harness validating schema, citations, and anti-hallucination rules

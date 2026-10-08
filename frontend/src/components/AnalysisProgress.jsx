@@ -18,14 +18,12 @@ export default function AnalysisProgress({ onComplete }) {
       timer = setTimeout(() => {
         setCurrentStep(prev => prev + 1);
       }, steps[currentStep].duration);
-    } else {
-      timer = setTimeout(() => {
-        onComplete();
-      }, 500);
     }
+    // We no longer call onComplete here. The parent component will unmount this component 
+    // and navigate to the next page when the backend API request finishes.
 
     return () => clearTimeout(timer);
-  }, [currentStep, steps, onComplete]);
+  }, [currentStep, steps]);
 
   return (
     <div style={{ padding: '2rem 0', textAlign: 'center' }}>

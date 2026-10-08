@@ -63,7 +63,7 @@ ClaimShield follows a strict **Understand → Ground → Reason → Verify → A
                                 |
                                 v
    [UNDERSTAND] +----------------------------------+
-                |     Gemma via Gemini API         |
+                |     Gemma via Local Ollama         |
                 |  (Extract Policy & Incident Fact)|
                 +----------------------------------+
                                 |
@@ -132,7 +132,7 @@ ClaimShield follows a strict **Understand → Ground → Reason → Verify → A
 | :--- | :--- | :--- |
 | **Frontend** | React (Vite), Vanilla CSS | Responsive, accessible, mobile-first calm UI (`/`, `/analyze`, `/report`, `/how-it-works`, `/privacy`). |
 | **Backend API** | Python, FastAPI, Pydantic | RESTful API orchestration, asynchronous pipeline execution, file buffer management. |
-| **Document AI** | Gemma via Gemini API | Multi-modal document understanding, policy parsing, clause extraction, incident structuring. |
+| **Document AI** | Gemma via Local Ollama | Multi-modal document understanding, policy parsing, clause extraction, incident structuring. |
 | **Data & Rules** | Snowflake | Policy-risk rule repository, synthetic healthcare claims dataset, benchmark analytics. |
 | **Workflow standard**| Agent Skill | Standardized procedure (`skills/claim-audit/`) defining audit steps and risk taxonomies. |
 | **AI Validation** | Model Harness | Custom validation layer checking schema conformance, factual citations, and zero hallucinated claims. |
@@ -142,8 +142,8 @@ ClaimShield follows a strict **Understand → Ground → Reason → Verify → A
 
 ## 6. Detailed Roles of Core Technologies
 
-### Gemma (via Gemini API)
-Gemma acts as the core document reasoning and entity extraction engine:
+### Gemma (via Local Ollama)
+Gemma4 acts as the core document reasoning and entity extraction engine:
 - Extracts structured policy terms into strictly typed JSON (Limits, Co-pay, Deadlines, Exclusions).
 - Normalizes incident descriptions into structured timestamps and financial figures.
 - Formulates candidate adversarial risk arguments based on document evidence.
@@ -214,7 +214,7 @@ claimshield-ai/
 │   ├── rules.sql              # Seed policy-risk rules
 │   └── analytics.sql          # Benchmark comparison queries
 ├── gemma/                     # Gemma extraction prompts and JSON schemas
-│   ├── extraction.py          # Gemini API wrapper for Gemma
+│   ├── extraction.py          # Local Ollama wrapper for Gemma4
 │   ├── prompts/               # Structured extraction prompts
 │   └── schemas/               # Pydantic schemas for extracted data
 ├── sample-data/               # Sample policies and synthetic incident tests
@@ -235,14 +235,15 @@ claimshield-ai/
 ### Prerequisites
 - Python 3.10+
 - Node.js 18+
-- Gemini API Key (for Gemma model access)
+- Local Ollama running Gemma4 (gemma4:e4b)
 - Snowflake Account credentials (or local mock driver for offline evaluation)
 
 ### Environment Variables (`.env`)
 ```env
 # Backend & AI Configuration
-GEMINI_API_KEY=your_gemini_api_key_here
-GEMMA_MODEL_NAME=gemma-3-27b-it
+GEMMA_PROVIDER=ollama
+OLLAMA_BASE_URL=http://localhost:11434
+GEMMA_MODEL=gemma4:e4b
 
 # Snowflake Configuration
 SNOWFLAKE_ACCOUNT=your_account_identifier

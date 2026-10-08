@@ -29,11 +29,9 @@ export default function PolicyUploader({ uploadedFile, setUploadedFile, error, s
     }
 
     setError(null);
-    setUploadedFile({
-      name: file.name,
-      size: (file.size / (1024 * 1024)).toFixed(1) + ' MB',
-      type: file.type
-    });
+    // Attach the actual file blob so it can be appended to FormData
+    file.displaySize = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
+    setUploadedFile(file);
   };
 
   const handleDrop = (e) => {
@@ -52,11 +50,11 @@ export default function PolicyUploader({ uploadedFile, setUploadedFile, error, s
 
   const handleUseMockFile = () => {
     setError(null);
-    setUploadedFile({
-      name: 'Health_Insurance_Policy.pdf',
-      size: '2.4 MB',
-      type: 'application/pdf'
-    });
+    // Create a dummy Blob to satisfy the File interface
+    const dummyBlob = new Blob(['Dummy policy content for testing'], { type: 'application/pdf' });
+    dummyBlob.name = 'Health_Insurance_Policy.pdf';
+    dummyBlob.displaySize = '2.4 MB';
+    setUploadedFile(dummyBlob);
   };
 
   return (
