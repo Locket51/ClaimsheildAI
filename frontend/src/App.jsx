@@ -5,6 +5,7 @@ import Analyze from './pages/Analyze';
 import Report from './pages/Report';
 import HowItWorks from './pages/HowItWorks';
 import Privacy from './pages/Privacy';
+import Compare from './pages/Compare';
 import { MOCK_CLAIM_DATA } from './data/mockClaimData';
 import { ShieldCheck } from 'lucide-react';
 
@@ -144,6 +145,8 @@ export default function App() {
 
   const renderCurrentView = () => {
     switch (currentPath) {
+      case '/compare':
+        return <Compare onGoHome={() => navigate('/')} />;
       case '/analyze':
         return <Analyze />;
       case '/report':
@@ -154,7 +157,7 @@ export default function App() {
         return <Privacy />;
       case '/':
       default:
-        return <Home onStartAnalysis={handleStartAnalysis} />;
+        return <Home onStartAnalysis={handleStartAnalysis} onNavigate={navigate} />;
     }
   };
 

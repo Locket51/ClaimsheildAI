@@ -6,7 +6,7 @@ import PrivacyNotice from '../components/PrivacyNotice';
 import SecurityPreviewCard from '../components/SecurityPreviewCard';
 import { ArrowRight, Check, ShieldCheck, Lock, FileSearch } from 'lucide-react';
 
-export default function Home({ onStartAnalysis }) {
+export default function Home({ onStartAnalysis, onNavigate }) {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [incidentText, setIncidentText] = useState('');
   const [supportingFiles, setSupportingFiles] = useState([]);
@@ -80,6 +80,33 @@ export default function Home({ onStartAnalysis }) {
 
           <div style={{ marginTop: '2rem' }}>
             <SecurityPreviewCard />
+          </div>
+
+          {/* Secondary Flow Entry: Compare Policies */}
+          <div className="card" style={{ 
+            marginTop: '1.5rem', 
+            padding: '1.25rem 1.5rem', 
+            backgroundColor: 'var(--bg-surface-subtle)',
+            border: '1px solid var(--border-color)' 
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+              <FileSearch size={16} style={{ color: 'var(--color-accent)' }} />
+              <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                Comparing multiple policies?
+              </h3>
+            </div>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginBottom: '0.85rem', lineHeight: 1.5 }}>
+              Compare 2 to 3 health insurance policies side-by-side across room-rent caps, co-pay, waiting periods, and claim deadlines.
+            </p>
+            <button 
+              type="button" 
+              className="btn btn-secondary" 
+              onClick={() => onNavigate && onNavigate('/compare')}
+              style={{ fontSize: '0.8125rem', padding: '0.4rem 0.85rem' }}
+            >
+              <span>Compare Policies</span>
+              <ArrowRight size={14} />
+            </button>
           </div>
         </div>
 
