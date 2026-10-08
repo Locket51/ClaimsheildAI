@@ -156,11 +156,6 @@ Gemma4 acts as the core document reasoning and entity extraction engine:
 - Formulates candidate adversarial risk arguments based on document evidence.
 - *Strict Constraint:* Gemma outputs are enforced via Pydantic schemas and validated by the Model Harness; Gemma never interacts with the user as an unconstrained chatbot.
 
-### Snowflake
-Snowflake provides structured policy-risk rules and analytical benchmarks:
-- **Policy-Risk Rules:** Contains normalized insurance risk patterns (e.g., Room Rent Limit -> Proportionate Deduction Rule).
-- **Synthetic Healthcare Benchmark Data:** Provides regional procedure benchmark costs and category context without invading user privacy.
-- **Cortex Analytics:** Used to run SQL-based benchmark comparisons to contextualize claim amounts.
 
 ### Agent Skill (`skills/claim-audit/`)
 Built according to the **Agent Skill Open Standard**:
