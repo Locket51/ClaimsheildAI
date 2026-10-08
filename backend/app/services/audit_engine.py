@@ -19,7 +19,8 @@ class AuditEngine:
         severity_ranks = {"LOW": 1, "MEDIUM": 2, "HIGH": 3, "CRITICAL": 4}
         
         for fact in facts:
-            fact_clause = fact.get("clause_type", "").replace("_LIMIT", "") 
+            clause = fact.get("clause_type")
+            fact_clause = (clause if clause is not None else "").replace("_LIMIT", "")
             
             matched_rule = next((rule for rule in self.policy_rules if rule["CLAUSE_TYPE"] == fact_clause or rule["CLAUSE_TYPE"] in fact_clause), None)
             

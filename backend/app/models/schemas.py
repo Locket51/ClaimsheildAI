@@ -5,11 +5,14 @@ class UploadIncident(BaseModel):
     incident_description: str
     
 class ExtractedFact(BaseModel):
-    clause_type: str = Field(description="e.g., ROOM_RENT_LIMIT, CO_PAY, WAITING_PERIOD, DEADLINE")
-    description: str = Field(description="What the clause limits or requires")
-    policy_reference: Optional[str] = Field(description="Section number or heading")
-    evidence: Optional[str] = Field(description="Exact quote from the policy text")
+    clause_type: Optional[str] = Field(default=None, description="e.g., ROOM_RENT_LIMIT, CO_PAY, WAITING_PERIOD, DEADLINE")
+    description: Optional[str] = Field(default=None, description="What the clause limits or requires")
+    policy_reference: Optional[str] = Field(default=None, description="Section number or heading")
+    evidence: Optional[str] = Field(default=None, description="Exact quote from the policy text")
     confidence: float = Field(default=1.0)
+    
+    class Config:
+        extra = "ignore"
 
 class RiskFinding(BaseModel):
     severity: str = Field(description="CRITICAL, HIGH, MEDIUM, LOW")

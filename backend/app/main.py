@@ -5,7 +5,7 @@ import uuid
 import os
 import json
 from app.providers.gemma_provider import GemmaProvider
-from app.models.schemas import AnalyzeResponse, ActionItem, ExtractedFact
+from app.models.schemas import AnalyzeResponse, ActionItem, ExtractedFact, RiskFinding
 from app.services.audit_engine import AuditEngine
 from app.core.config import settings
 
@@ -130,4 +130,27 @@ async def analyze_claim(
         )
         
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+        print(f"CRITICAL ERROR in AI pipeline: {str(e)}")
+        return AnalyzeResponse(
+            analysis_id=analysis_id,
+            status="completed",
+            risk_level="HIGH",
+            summary={"issues_found": 1},
+            risks=[
+                RiskFinding(
+                    severity="HIGH",
+                    category="PROCEDURAL",
+                    title="Audit Process Interrupted",
+                    interpretation=f"The AI engine encountered an anomaly: {str(e)}. This usually happens if the AI hallucinates a completely invalid response.",
+                    recommended_action="Please try clicking Analyze again.",
+                    policy_evidence="N/A",
+                    user_evidence="N/A",
+                    policy_reference="N/A"
+                )
+            ],
+            deadlines=[],
+            actions=[ActionItem(task="Click Analyze again", priority="HIGH")],
+            evidence=[],
+            email_draft="N/A",
+            warnings=["Fallback response generated due to an AI processing error."]
+        )
