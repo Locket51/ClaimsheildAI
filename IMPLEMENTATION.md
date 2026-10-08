@@ -96,23 +96,31 @@ Step 9: Ephemeral file buffer purged from memory.
    - Incident Details Form (Admission date/time, Daily room charge, Diagnosis/Treatment, Hospital Name)
    - Supporting Documents Uploader (Optional: Bills, Estimate letters)
    - Prominent Privacy Guarantee Notice
-2. **`/analyze` (Analysis Stepper / Progress View):**
+2. **`/compare` (Multi-Policy Comparison) `[IMPLEMENTED]`:**
+   - Drag-and-Drop Uploader for 2 to 3 Policy PDFs with size/type validation
+   - Custom policy naming inputs (e.g., Star Health, Care Insurance)
+   - Optional Priority Selector chips (*Lower out-of-pocket cost*, *Fewer restrictions*, *Shorter waiting periods*, etc.)
+   - Staged Progress Animation during comparison
+   - Responsive Condition Comparison Matrix Table (*Sum Insured*, *Room Rent Limit*, *Co-Pay*, *Emergency Notice Window*, *PED Waiting Period*, *Claim Submission Deadline*, *ICU Limit*, *Ambulance Coverage*)
+   - Key Differences Breakdown Cards & Grounded Citation Evidence Drawer
+   - Personalized Priority Takeaway Analysis & Legal Disclaimer
+3. **`/analyze` (Analysis Stepper / Progress View):**
    - Real-time animated step indicator:
      - *Reading policy clauses...*
      - *Extracting key deadlines & financial caps...*
      - *Checking Snowflake policy risk rules...*
      - *Running adversarial audit harness...*
      - *Generating action plan...*
-3. **`/report` (Claim Risk Report):**
+4. **`/report` (Claim Risk Report):**
    - Overall Risk Level Indicator (`CRITICAL`, `HIGH`, `MEDIUM`, `ATTENTION`)
    - High-Attention Findings List (Cards featuring Policy Evidence, User Evidence, Interpretation, Recommended Action)
    - Verified Deadline Countdown Widget
    - Interactive Action Checklist
    - AI Claim Communication Draft ("Magic Email") Modal Trigger
-4. **`/how-it-works` (Product Methodology):**
+5. **`/how-it-works` (Product Methodology):**
    - Simple 3-step explanation: *Upload → Audit → Act*
    - Explanation of Adversarial Auditing vs generic AI chat
-5. **`/privacy` (Privacy & Security Commitment):**
+6. **`/privacy` (Privacy & Security Commitment):**
    - Zero persistent storage statement
    - Data minimization workflow
    - Legal disclaimer & AI limitation boundaries

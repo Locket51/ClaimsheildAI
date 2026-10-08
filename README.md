@@ -124,13 +124,20 @@ ClaimShield follows a strict **Understand → Ground → Reason → Verify → A
 6. **AI-Assisted Claim Communication Draft ("Magic Email"):**
    - Automatically generates structured, professional notification or dispute emails addressed to the TPA/insurer, referencing exact policy clauses.
 
+7. **Multi-Policy Comparison (`/compare`):**
+   - Visually upload and compare 2 to 3 health insurance policies side-by-side.
+   - Side-by-side comparison matrix across room-rent caps, co-pay %, PED waiting periods, emergency notification deadlines, ICU caps, and ambulance benefits.
+   - Optional priority selector (*Lower out-of-pocket cost*, *Fewer restrictions*, *Shorter waiting periods*, etc.) to generate personalized takeaways.
+   - Grounded clause evidence side drawer showing exact policy text and page numbers.
+   - Strict evidence-first approach with zero speculative or fake score rankings.
+
 ---
 
 ## 5. Technology Stack & Component Architecture
 
 | Layer | Technology | Key Responsibility |
 | :--- | :--- | :--- |
-| **Frontend** | React (Vite), Vanilla CSS | Responsive, accessible, mobile-first calm UI (`/`, `/analyze`, `/report`, `/how-it-works`, `/privacy`). |
+| **Frontend** | React (Vite), Vanilla CSS | Responsive, accessible, mobile-first calm UI (`/`, `/compare`, `/analyze`, `/report`, `/how-it-works`, `/privacy`). |
 | **Backend API** | Python, FastAPI, Pydantic | RESTful API orchestration, asynchronous pipeline execution, file buffer management. |
 | **Document AI** | Gemma via Gemini API | Multi-modal document understanding, policy parsing, clause extraction, incident structuring. |
 | **Data & Rules** | Snowflake | Policy-risk rule repository, synthetic healthcare claims dataset, benchmark analytics. |
